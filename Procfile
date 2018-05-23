@@ -1,0 +1,1 @@
+web: gunicorn seasonal.wsgi

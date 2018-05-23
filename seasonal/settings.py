@@ -11,8 +11,11 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import datetime
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
+import django_heroku
+
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # Quick-start development settings - unsuitable for production
@@ -32,6 +35,8 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 AUTH_USER_MODEL = 'api.User'
+# https://stackoverflow.com/questions/36698456/django-rest-auth-email-instead-of-username
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
 # Application definition
 
@@ -43,8 +48,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'api.apps.ApiConfig',
-    'rest_framework.authtoken'
+    'rest_framework.authtoken',
+    'rest_auth',
+    'api.apps.ApiConfig'
 ]
 
 MIDDLEWARE = [
@@ -122,3 +128,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+# https://devcenter.heroku.com/articles/django-app-configuration
+django_heroku.settings(locals())
