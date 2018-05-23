@@ -1,1 +1,1 @@
-gunicorn seasonal.wsgi
+web: gunicorn myproject.wsgi
