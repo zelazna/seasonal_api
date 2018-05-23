@@ -8,6 +8,10 @@ django = "*"
 djangorestframework = "*"
 djangorestframework-jwt = "*"
 coreapi = "*"
+django-allauth = "*"
+django-rest-auth = "*"
+gunicorn = "*"
+django-heroku = "*"
 
 [dev-packages]
 pylint = "*"
