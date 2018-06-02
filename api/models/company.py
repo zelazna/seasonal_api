@@ -1,6 +1,6 @@
 from django.db import models
 
-from api.models.job import Job
+from api.models import Job
 
 
 class Company(models.Model):

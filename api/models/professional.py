@@ -1,10 +1,10 @@
 from django.db import models
 
-from api.models.company import Company
-from api.models.user import User
+from api.models import Company, User
 
 
-class Professional(User):
+class Professional(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     company = models.ForeignKey(Company,
                                 related_name='employees',
                                 on_delete=models.CASCADE)

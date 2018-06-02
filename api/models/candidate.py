@@ -1,12 +1,12 @@
 from django.db import models
 
-from api.models.job import Job
-from api.models.user import User
+from api.models import User, Job
 
 
-class Candidate(User):
+class Candidate(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
     year_exp = models.IntegerField()
-    available_at = models.DateTimeField('available_at')
+    available_at = models.DateTimeField('available_at', null=True)
     profile_view_count = models.IntegerField(default=0)
     wage_claim = models.IntegerField()
     profile_picture_url = models.CharField(blank=True,
