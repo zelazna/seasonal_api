@@ -4,7 +4,7 @@ from django.contrib.auth.models import BaseUserManager
 class UserManager(BaseUserManager):
     """
     A custom user manager to deal with emails as unique identifiers for auth
-    instead of usernames. The default that's used is "UserManager"
+    instead of username. The default that's used is "UserManager"
     """
 
     def _create_user(self, email, password, **extra_fields):

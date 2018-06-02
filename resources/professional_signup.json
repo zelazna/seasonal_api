@@ -1,0 +1,11 @@
+{
+  "user": {
+    "email": "const.guidon@gmail.com",
+    "password": "azertyuiop"
+  },
+  "company": {
+    "name": "Chez LOLI",
+    "address": "9 rue Marcelle Sembat",
+    "job": 1
+  }
+}

@@ -11,6 +11,3 @@ class Professional(models.Model):
 
     def __str__(self):
         return "Professional"
-
-    def __repr__(self):
-        return "Professional"

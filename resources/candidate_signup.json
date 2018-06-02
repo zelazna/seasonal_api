@@ -1,0 +1,13 @@
+{
+  "user": {
+    "email": "toto.tutu@gmail.com",
+    "password": "azertyuiop"
+  },
+  "year_exp": 1,
+  "available_at": "2018-06-02T06:13:05Z",
+  "profile_view_count": 0,
+  "wage_claim": 45000,
+  "profile_picture_url": "http://toto.com",
+  "description": "blah",
+  "job": 1
+}
