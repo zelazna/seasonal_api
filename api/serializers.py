@@ -2,7 +2,7 @@ from rest_framework import serializers
 from api.models import Candidate, Professional, Job
 
 
-class BaseSerializer(serializers.ModelSerializer):
+class BaseUserSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         password = validated_data.pop('password', None)
         instance = self.Meta.model(**validated_data)
@@ -21,11 +21,10 @@ class BaseSerializer(serializers.ModelSerializer):
         return instance
 
 
-class CandidateSerializer(BaseSerializer):
+class CandidateSerializer(BaseUserSerializer):
     class Meta:
         model = Candidate
         fields = (
-            'id',
             'email',
             'password',
             'year_exp',
@@ -38,7 +37,7 @@ class CandidateSerializer(BaseSerializer):
         )
 
 
-class ProfessionalSerializer(BaseSerializer):
+class ProfessionalSerializer(BaseUserSerializer):
     class Meta:
         model = Professional
         fields = ('company',)
