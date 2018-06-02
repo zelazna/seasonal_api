@@ -1,5 +1,4 @@
 from rest_framework import serializers
-from api.models import Candidate, Professional, Job
 
 
 class BaseUserSerializer(serializers.ModelSerializer):
@@ -19,31 +18,3 @@ class BaseUserSerializer(serializers.ModelSerializer):
                 setattr(instance, attr, value)
         instance.save()
         return instance
-
-
-class CandidateSerializer(BaseUserSerializer):
-    class Meta:
-        model = Candidate
-        fields = (
-            'email',
-            'password',
-            'year_exp',
-            'available_at',
-            'profile_view_count',
-            'wage_claim',
-            'profile_picture_url',
-            'description',
-            'job'
-        )
-
-
-class ProfessionalSerializer(BaseUserSerializer):
-    class Meta:
-        model = Professional
-        fields = ('company',)
-
-
-class JobSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Job
-        fields = ('name',)
