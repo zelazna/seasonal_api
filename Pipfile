@@ -13,6 +13,8 @@ django-rest-auth = "*"
 gunicorn = "*"
 django-heroku = "*"
 "psycopg2-binary" = "*"
+faker = "*"
+factory-boy = "*"
 
 [dev-packages]
 pylint = "*"
