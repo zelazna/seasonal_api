@@ -2,6 +2,7 @@ from rest_framework import viewsets
 from rest_framework.response import Response
 
 from api.models import Candidate, Professional, Job
+from api.permissions import IsOwnerOrReadOnly
 from api.serializers import CandidateSerializer, ProfessionalSerializer, JobSerializer, CandidateListSerializer
 
 
@@ -12,6 +13,7 @@ class CandidateViewSet(viewsets.ModelViewSet):
     """
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
     def list(self, request, **kwargs):
         """
@@ -35,6 +37,7 @@ class ProfessionalViewSet(viewsets.ModelViewSet):
     """
     queryset = Professional.objects.all()
     serializer_class = ProfessionalSerializer
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
 class JobViewSet(viewsets.ReadOnlyModelViewSet):
