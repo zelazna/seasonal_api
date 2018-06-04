@@ -38,6 +38,7 @@ AUTH_USER_MODEL = 'api.User'
 # https://stackoverflow.com/questions/36698456/django-rest-auth-email-instead-of-username
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
+TIME_ZONE = 'Europe/Paris'
 # Application definition
 
 INSTALLED_APPS = [
@@ -62,6 +63,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
 
 ROOT_URLCONF = 'seasonal.urls'
 

@@ -2,19 +2,12 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin as DjangoUserAdmin
 from django.utils.translation import ugettext_lazy as _
 
-from .models import User, Job, Company
+from .models import User, Job, Company, Candidate, Professional
 
-
-class CompanyAdmin(admin.ModelAdmin):
-    list_display = ('address', 'name', 'job')
-
-
-class JobAdmin(admin.ModelAdmin):
-    list_display = ('name',)
-
-
-admin.site.register(Job, JobAdmin)
-admin.site.register(Company, CompanyAdmin)
+admin.site.register(Job)
+admin.site.register(Company)
+admin.site.register(Candidate)
+admin.site.register(Professional)
 
 
 @admin.register(User)

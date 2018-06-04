@@ -1,0 +1,6 @@
+from .user_serializer import UserSerializer
+from .candidate_serializer import CandidateSerializer
+from .job_serializer import JobSerializer
+from .company_serializer import CompanySerializer
+from .professional_serializer import ProfessionalSerializer
+from .candidate_list_serializer import CandidateListSerializer
