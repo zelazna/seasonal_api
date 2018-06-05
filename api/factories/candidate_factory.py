@@ -1,11 +1,9 @@
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 import factory.fuzzy
-from api.factories import UserFactory
+from api.factories import UserFactory, JOBS
 from api.models import Candidate, Job
 from random import randint
-
-JOBS = [x for x in Job.objects.all()]
 
 
 class CandidateFactory(DjangoModelFactory):
