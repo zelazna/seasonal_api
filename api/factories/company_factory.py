@@ -1,9 +1,9 @@
 from factory.django import DjangoModelFactory
 from factory import Faker
 import factory.fuzzy
-from api.models import Company, Job
 
-JOBS = [x for x in Job.objects.all()]
+from api.factories import JOBS
+from api.models import Company
 
 
 class CompanyFactory(DjangoModelFactory):

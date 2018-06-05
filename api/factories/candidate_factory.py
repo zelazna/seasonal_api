@@ -1,11 +1,9 @@
 from factory.django import DjangoModelFactory
 from factory import Faker, SubFactory
 import factory.fuzzy
-from api.factories import UserFactory
+from api.factories import UserFactory, JOBS
 from api.models import Candidate, Job
 from random import randint
-
-JOBS = [x for x in Job.objects.all()]
 
 
 class CandidateFactory(DjangoModelFactory):
@@ -14,6 +12,7 @@ class CandidateFactory(DjangoModelFactory):
 
     user = SubFactory(UserFactory)
     year_exp = randint(1, 15)
+    # TODO : fix naive datetime format
     available_at = Faker('date_time')
     profile_view_count = randint(0, 400)
     wage_claim = randint(10000, 50000)

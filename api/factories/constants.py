@@ -1,1 +1,0 @@
-JOBS = ['Serveur', 'Plongeur', 'Réceptioniste']
