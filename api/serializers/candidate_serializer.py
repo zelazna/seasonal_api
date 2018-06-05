@@ -16,7 +16,7 @@ class CandidateSerializer(UserSerializerMixin, serializers.ModelSerializer):
             'available_at',
             'profile_view_count',
             'wage_claim',
-            'profile_picture_url',
+            'profile_picture',
             'description',
             'job'
         )

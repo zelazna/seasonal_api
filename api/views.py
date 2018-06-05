@@ -1,4 +1,5 @@
 from rest_framework import viewsets, mixins, generics
+from rest_framework.parsers import MultiPartParser, JSONParser, FormParser
 
 from api.models import Candidate, Professional, Job
 from api.permissions import IsOwnerOrReadOnly, IsProfessional
@@ -8,8 +9,7 @@ from django.db.models import F
 from rest_framework.response import Response
 
 
-class CandidateList(mixins.ListModelMixin,
-                    mixins.CreateModelMixin,
+class CandidateList(mixins.ListModelMixin, mixins.CreateModelMixin,
                     generics.GenericAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateListSerializer
@@ -27,13 +27,12 @@ class CandidateList(mixins.ListModelMixin,
         return self.create(request, *args, **kwargs)
 
 
-class CandidateDetail(mixins.RetrieveModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin,
-                      generics.GenericAPIView):
+class CandidateDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
+                      mixins.DestroyModelMixin, generics.GenericAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    # permission_classes = (IsOwnerOrReadOnly,)
+    parser_classes = (JSONParser, MultiPartParser, FormParser,)
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -59,7 +58,11 @@ class CandidateDetail(mixins.RetrieveModelMixin,
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+        if request.FILES.get('file'):
+            instance = self.get_object()
+            instance.profile_picture = request.FILES['file']
+            instance.save()
+        return self.partial_update(request, *args, **kwargs)
 
 
 class ProfessionalViewSet(viewsets.ModelViewSet):

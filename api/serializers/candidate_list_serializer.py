@@ -2,9 +2,10 @@ from api.models import Candidate
 from rest_framework import serializers
 
 from api.serializers import UserSerializer
+from api.serializers.mixins.user_serializer_mixin import UserSerializerMixin
 
 
-class CandidateListSerializer(serializers.ModelSerializer):
+class CandidateListSerializer(UserSerializerMixin, serializers.ModelSerializer):
     user = UserSerializer()
 
     class Meta:
@@ -15,7 +16,7 @@ class CandidateListSerializer(serializers.ModelSerializer):
             'available_at',
             'profile_view_count',
             'wage_claim',
-            'profile_picture_url',
+            'profile_picture',
             'description',
             'job'
         )

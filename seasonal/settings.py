@@ -38,7 +38,8 @@ AUTH_USER_MODEL = 'api.User'
 # https://stackoverflow.com/questions/36698456/django-rest-auth-email-instead-of-username
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 
-TIME_ZONE = 'Europe/Paris'
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), 'seasonal')
 # Application definition
 
 INSTALLED_APPS = [

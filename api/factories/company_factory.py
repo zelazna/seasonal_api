@@ -2,8 +2,7 @@ from factory.django import DjangoModelFactory
 from factory import Faker
 import factory.fuzzy
 
-from api.factories import JOBS
-from api.models import Company
+from api.models import Company, Job
 
 
 class CompanyFactory(DjangoModelFactory):
@@ -12,4 +11,4 @@ class CompanyFactory(DjangoModelFactory):
 
     name = Faker('company')
     address = Faker('address')
-    job = factory.fuzzy.FuzzyChoice(JOBS)
+    job = factory.fuzzy.FuzzyChoice(Job.objects.all())
