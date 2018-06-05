@@ -1,5 +1,6 @@
 from rest_framework import viewsets, mixins, generics
-from rest_framework.parsers import MultiPartParser, JSONParser, FormParser
+from rest_framework.authentication import BasicAuthentication, TokenAuthentication
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from api.models import Candidate, Professional, Job
 from api.permissions import IsOwnerOrReadOnly, IsProfessional
@@ -28,11 +29,12 @@ class CandidateList(mixins.ListModelMixin, mixins.CreateModelMixin,
 
 
 class CandidateDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin, generics.GenericAPIView):
+                      generics.GenericAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
+    # TODO : fix auth token not handled with multipart/form-data
     # permission_classes = (IsOwnerOrReadOnly,)
-    parser_classes = (JSONParser, MultiPartParser, FormParser,)
+    parser_classes = (MultiPartParser, FormParser)
 
     def retrieve(self, request, *args, **kwargs):
         """
