@@ -14,6 +14,7 @@ class CandidateFactory(DjangoModelFactory):
 
     user = SubFactory(UserFactory)
     year_exp = randint(1, 15)
+    # TODO : fix naive datetime format
     available_at = Faker('date_time')
     profile_view_count = randint(0, 400)
     wage_claim = randint(10000, 50000)
