@@ -1,5 +1,4 @@
 from rest_framework import viewsets, mixins, generics
-from rest_framework.authentication import BasicAuthentication, TokenAuthentication
 from rest_framework.parsers import MultiPartParser, FormParser
 
 from api.models import Candidate, Professional, Job
