@@ -3,4 +3,3 @@ from .user_serializer import UserSerializer
 from .candidate_serializer import CandidateSerializer
 from .company_serializer import CompanySerializer
 from .professional_serializer import ProfessionalSerializer
-from .candidate_list_serializer import CandidateListSerializer

@@ -4,7 +4,7 @@ from rest_framework.parsers import MultiPartParser, FormParser
 
 from api.models import Candidate, Professional, Job
 from api.permissions import IsOwnerOrReadOnly, IsProfessional
-from api.serializers import CandidateSerializer, ProfessionalSerializer, JobSerializer, CandidateListSerializer
+from api.serializers import CandidateSerializer, ProfessionalSerializer, JobSerializer
 from django.db.models import F
 
 from rest_framework.response import Response
@@ -13,7 +13,7 @@ from rest_framework.response import Response
 class CandidateList(mixins.ListModelMixin, mixins.CreateModelMixin,
                     generics.GenericAPIView):
     queryset = Candidate.objects.all()
-    serializer_class = CandidateListSerializer
+    serializer_class = CandidateSerializer
     permission_classes = (IsOwnerOrReadOnly, IsProfessional)
 
     def get(self, request):
@@ -21,7 +21,7 @@ class CandidateList(mixins.ListModelMixin, mixins.CreateModelMixin,
         job_name = request.query_params.get('job_name', None)
         if job_name is not None:
             queryset = queryset.filter(job__name=job_name)
-        serializer = CandidateListSerializer(queryset, many=True)
+        serializer = CandidateSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):

@@ -12,7 +12,7 @@ class CompanyFactory(DjangoModelFactory):
     address = Faker('address')
 
     @factory.post_generation
-    def jobs(self, create, extracted, **kwargs):
+    def jobs(self, create, extracted):
         if not create:
             # Simple build, do nothing.
             return
