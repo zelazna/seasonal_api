@@ -9,9 +9,12 @@ class Candidate(models.Model):
     available_at = models.DateTimeField('available_at', null=True)
     profile_view_count = models.IntegerField(default=0)
     wage_claim = models.IntegerField()
-    profile_picture_url = models.URLField(blank=True,
-                                          default='',
-                                          max_length=255)
+    profile_picture = models.ImageField(
+        upload_to="uploads",
+        max_length=254,
+        blank=True,
+        null=True
+    )
     description = models.TextField(blank=True)
     job = models.ForeignKey(Job, on_delete=models.CASCADE)
 

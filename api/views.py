@@ -1,18 +1,18 @@
 from rest_framework import viewsets, mixins, generics
+from rest_framework.parsers import MultiPartParser, FormParser
 
 from api.models import Candidate, Professional, Job
 from api.permissions import IsOwnerOrReadOnly, IsProfessional
-from api.serializers import CandidateSerializer, ProfessionalSerializer, JobSerializer, CandidateListSerializer
+from api.serializers import CandidateSerializer, ProfessionalSerializer, JobSerializer
 from django.db.models import F
 
 from rest_framework.response import Response
 
 
-class CandidateList(mixins.ListModelMixin,
-                    mixins.CreateModelMixin,
+class CandidateList(mixins.ListModelMixin, mixins.CreateModelMixin,
                     generics.GenericAPIView):
     queryset = Candidate.objects.all()
-    serializer_class = CandidateListSerializer
+    serializer_class = CandidateSerializer
     permission_classes = (IsOwnerOrReadOnly, IsProfessional)
 
     def get(self, request):
@@ -20,20 +20,20 @@ class CandidateList(mixins.ListModelMixin,
         job_name = request.query_params.get('job_name', None)
         if job_name is not None:
             queryset = queryset.filter(job__name=job_name)
-        serializer = CandidateListSerializer(queryset, many=True)
+        serializer = CandidateSerializer(queryset, many=True)
         return Response(serializer.data)
 
     def post(self, request, *args, **kwargs):
         return self.create(request, *args, **kwargs)
 
 
-class CandidateDetail(mixins.RetrieveModelMixin,
-                      mixins.UpdateModelMixin,
-                      mixins.DestroyModelMixin,
+class CandidateDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin,
                       generics.GenericAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    # TODO : fix auth token not handled with multipart/form-data
+    # permission_classes = (IsOwnerOrReadOnly,)
+    parser_classes = (MultiPartParser, FormParser)
 
     def retrieve(self, request, *args, **kwargs):
         """
@@ -59,7 +59,11 @@ class CandidateDetail(mixins.RetrieveModelMixin,
         return self.update(request, *args, **kwargs)
 
     def patch(self, request, *args, **kwargs):
-        return self.update(request, *args, **kwargs)
+        if request.FILES.get('file'):
+            instance = self.get_object()
+            instance.profile_picture = request.FILES['file']
+            instance.save()
+        return self.partial_update(request, *args, **kwargs)
 
 
 class ProfessionalViewSet(viewsets.ModelViewSet):

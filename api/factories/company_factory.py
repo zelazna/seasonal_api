@@ -1,8 +1,6 @@
 from factory.django import DjangoModelFactory
 from factory import Faker
 import factory.fuzzy
-
-from api.factories import JOBS
 from api.models import Company
 
 
@@ -12,4 +10,14 @@ class CompanyFactory(DjangoModelFactory):
 
     name = Faker('company')
     address = Faker('address')
-    job = factory.fuzzy.FuzzyChoice(JOBS)
+
+    @factory.post_generation
+    def jobs(self, create, extracted):
+        if not create:
+            # Simple build, do nothing.
+            return
+
+        if extracted:
+            # A list of groups were passed in, use them
+            for job in extracted:
+                self.jobs.add(job)

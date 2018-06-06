@@ -16,8 +16,8 @@ class Command(BaseCommand):
                             help='The number of fake users to create.')
 
     def handle(self, *args, **options):
-        for job_name in ['serveur', 'plongeur', 'réceptioniste']:
-            Job.objects.get_or_create(name=job_name)
+        # for job_name in ['serveur', 'plongeur', 'réceptioniste']:
+        #     Job.objects.get_or_create(name=job_name)
         for _ in range(options['users']):
             CandidateFactory.create()
             ProfessionalFactory.create()
