@@ -2,6 +2,7 @@ from factory.django import DjangoModelFactory
 import factory
 
 from api.factories import UserFactory, CompanyFactory
+from api.factories.job_factory import JobFactory
 from api.models import Professional
 
 
@@ -10,4 +11,4 @@ class ProfessionalFactory(DjangoModelFactory):
         model = Professional
 
     user = factory.SubFactory(UserFactory)
-    company = factory.SubFactory(CompanyFactory)
+    company = factory.SubFactory(CompanyFactory, jobs=(JobFactory.create(),))

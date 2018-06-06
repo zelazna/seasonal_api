@@ -7,4 +7,4 @@ class CompanySerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Company
-        fields = ('name', 'address', 'job')
+        fields = ('name', 'address', 'jobs')
