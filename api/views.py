@@ -13,7 +13,7 @@ class CandidateList(mixins.ListModelMixin, mixins.CreateModelMixin,
                     generics.GenericAPIView):
     queryset = Candidate.objects.all()
     serializer_class = CandidateSerializer
-    permission_classes = (IsOwnerOrReadOnly, IsProfessional)
+    # permission_classes = (IsOwnerOrReadOnly, IsProfessional)
 
     def get(self, request):
         queryset = Candidate.objects.all()
