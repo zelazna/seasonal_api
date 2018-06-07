@@ -134,3 +134,4 @@ Temporary Items
 
 uploads/*.**
 !/uploads/.gitkeep
+!/uploads/img_placeholder.png
